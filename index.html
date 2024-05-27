@@ -23,6 +23,7 @@
 
             const socket = io();
 
+
             function funnybutton(isReal) {
                 socket.emit('funnybutton', isReal);
             }
@@ -49,6 +50,8 @@
                     document.getElementById("real2").currentTime = 0;
                 }
             });
+
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         </script>
     </body>
