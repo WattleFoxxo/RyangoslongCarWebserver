@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>RynaGosling pro max</title>
+    </head>
+    <body>
+        <button onclick="funnybutton(true)">Funny Button</button>
+        <button onclick="funnybutton(false)">unFunny Button</button>
+        <button onclick="funnybutton2(true)">Funny Button 2.0</button>
+        <button onclick="funnybutton2(false)">unFunny Button 2.0</button>
+
+        <audio id="real1" controls loop style="background-color: fuchsia;">
+            <source src="/skrillex.mp3" type="audio/mpeg">
+        </audio>
+
+        <audio id="real2" controls loop style="background-color: fuchsia;">
+            <source src="/beep.mp3" type="audio/mpeg">
+        </audio>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+
+            const socket = io();
+
+            function funnybutton(isReal) {
+                socket.emit('funnybutton', isReal);
+            }
+
+            function funnybutton2(isReal) {
+                socket.emit('funnybutton2', isReal);
+            }
+
+
+            socket.on('funnybutton', (isReal) => {
+                if (isReal) {
+                    document.getElementById("real1").play();
+                } else {
+                    document.getElementById("real1").pause();
+                    document.getElementById("real1").currentTime = 0;
+                }
+            });
+
+            socket.on('funnybutton2', (isReal) => {
+                if (isReal) {
+                    document.getElementById("real2").play();
+                } else {
+                    document.getElementById("real2").pause();
+                    document.getElementById("real2").currentTime = 0;
+                }
+            });
+
+        </script>
+    </body>
+</html>
